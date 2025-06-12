@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro Miembro</title>
+    <link rel="stylesheet" href="/css/registro.css">
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="login.html">Login</a></li>
+            <li><a href="#">Registro</a></li>
+            <li><a href="home.html">Home</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <h2>Registrarse</h2>
+        <h5>Sé un miembro de PetFinder</h2>
+        <form id="form-registro" action="#">
+            <input id="nombre" name="nombre" type="text" placeholder="Ingrese nombre" required>
+            <input id="apellido" name="apellido" type="text" placeholder="Ingrese apellido" required>
+            <input id="email" name="email" type="email" placeholder="Ingrese su email" required>
+            <input id="contrasenia" name="contrasenia" type="password" placeholder="Ingrese la contraseña" required>
+            <input id="confirmar-contrasenia" name="confirmar-contrasenia" type="password" placeholder="Repita la contraseña" required>
+
+            <button type="submit">Registrar</button>
+        </form>
+    </div>
+    <script src="/js/registro.js"></script>
+</body>
+</html>
