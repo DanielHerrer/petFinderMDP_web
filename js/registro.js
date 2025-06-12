@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Espera el evento de "SUBMIT" del boton del Formulario de Registrar Usuario
     form.addEventListener("submit", async (event) => {
-        e.preventDefault(); // evita el envío tradicional con el "action"
+        event.preventDefault(); // evita el envío tradicional con el "action"
 
         const nombre = document.getElementById('nombre').value;
         const apellido = document.getElementById('apellido').value;
