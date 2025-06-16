@@ -3,20 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Index</title>
+    <link rel="stylesheet" href="/css/index.css">
 </head>
 <body>
-    <nav>
+    <nav class="nav-header">
+        <h1>PetFinder MDP</h1>
         <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#">Registro</a></li>
             <li><a href="login.html">Login</a></li>
-            <li><a href="registro.html">Registro</a></li>
-            <li><a href="#">Home</a></li>
         </ul>
     </nav>
+
     <div class="container">
-        <h2>Bienvenido a la Página de Inicio</h2>
-        <p>Esta es la página principal donde puedes navegar entre el Login y Registro.</p>
+        <h2>Bienvenido a la Página de Index</h2>
+        <p>Esta es la página principal.</p>
     </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", async () => {
+            const token = localStorage.getItem("token");
+
+            if (token) {
+                try {
+                    // Realiza una peticion simple GET publicaciones para corroborar si tiene rol como MIEMBRO
+                    const response = await fetch("http://localhost:8080/publicaciones", {
+                        method: "GET",
+                        headers: {
+                            "Authorization": "Bearer " + token
+                        }
+                    });
+
+                    if (response.ok) {
+                        // Token válido → redirigir al home
+                        window.location.href = "home.html";
+
+                        // Mostrar botón si token es válido
+                        logoutBtn.style.display = "inline-block";
+
+                        if (response.status === 204) {
+                            console.log("Token válido, pero no hay contenido (204)");
+                            // Lógica para token válido pero sin datos
+
+                        } else if (response.status === 200) {
+                            const data = await response.json(); // Solo hacé esto si hay contenido
+                            console.log("Token válido, contenido recibido:", data);
+                            // Continuar normalmente
+                        }
+                    } else {
+                        // Token inválido
+                        console.log("Token inválido o error:", response.status);
+                        localStorage.removeItem("token"); // Limpiarlo si está vencido
+                    }
+                } catch (error) {
+                    console.error("Error al verificar token:", error);
+                    // Si ocurre un error de red o backend caído, también lo dejamos en index.html
+                }
+            }
+        });
+</script>
 </body>
 </html>

@@ -29,6 +29,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Intenta realizar la peticion a la API
         try {
+            console.log(data);
+
             const response = await fetch("http://localhost:8080/auth/registro", {
                 method: "POST",
                 headers: {
