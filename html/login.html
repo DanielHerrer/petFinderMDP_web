@@ -4,17 +4,57 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <link rel="stylesheet" href="/css/global.css">
     <link rel="stylesheet" href="/css/login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 </head>
 <body>
+    
     <nav class="nav-header">
-        <h1>PetFinder MDP</h1>
-        <ul>
-            <li><a href="#">Login</a></li>
-            <li><a href="registro.html">Registro</a></li>
+        <div class="nav-left">
+            <i style="font-size: 2.5rem; margin-right: 0.25em;" class="fa-solid fa-paw"></i>
+            <!-- <img src="logo.png" alt="Logo" class="nav-logo" /> -->
+            <h1>PetFinder MDP</h1>
+        </div>
+
+        <ul class="nav-menu">
             <li><a href="index.html">Home</a></li>
+
+            <li class="dropdown">
+                <a href="#"><i style="font-size: 1.5rem;" class="fa-solid fa-right-to-bracket"></i></a>
+                <ul class="dropdown-menu" id="menu-login">
+                    <li><a href="registro.html">Registro</a></li>
+                    <li><a href="login.html">Login</a></li>
+                </ul>
+            </li>
+
+            <li class="dropdown logged-in-only" style="display: none;">
+                <a href="#">Mascotas</a>
+                <ul class="dropdown-menu">
+                    <li><a href="nueva-mascota.html">Nueva Mascota</a></li>
+                    <li><a href="mis-mascotas.html">Mis Mascotas</a></li>
+                </ul>
+            </li>
+
+            <li class="dropdown logged-in-only" style="display: none;">
+                <a href="#">Publicaciones</a>
+                <ul class="dropdown-menu">
+                    <li><a href="nueva-publicacion.html">Nueva Publicación</a></li>
+                    <li><a href="muro.html">Muro</a></li>
+                </ul>
+            </li>
+
+            <li class="dropdown profile-menu logged-in-only" style="display: none;">
+                <a href="#"><i style="font-size: 1.5rem;" class="fa-solid fa-circle-user"></i></a>
+                <ul class="dropdown-menu right">
+                    <li><a href="perfil.html">Mi Perfil</a></li>
+                    <li><a href="terminos.html">Términos y Condiciones</a></li>
+                    <li><button id="logoutBtn">Cerrar sesión</button></li>
+                </ul>
+            </li>
         </ul>
     </nav>
+
     <div class="container">
 
         <form id="form-login" action="#">
@@ -26,6 +66,7 @@
             <button type="submit">Acceder</button>
         </form>
     </div>
+    <script src="/js/global.js"></script>
     <script src="/js/login.js"></script>
 </body>
 </html>

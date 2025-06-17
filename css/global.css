@@ -1,0 +1,80 @@
+body {
+    width: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #fff9f1;
+    color: #333;
+}
+
+.nav-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #eba729;
+  color: white;
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+}
+
+.nav-logo {
+  width: 32px;
+  height: 32px;
+  margin-right: 10px;
+}
+
+.nav-menu {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-menu li {
+  position: relative;
+}
+
+.nav-menu a {
+  text-decoration: none;
+  color: white;
+  padding: 8px;
+  display: block;
+}
+
+.nav-menu .dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  min-width: 160px;
+  background-color: #34495e;
+  display: none;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border-radius: 4px;
+}
+
+.nav-menu .dropdown-menu li a,
+.nav-menu .dropdown-menu li button {
+  padding: 10px;
+  display: block;
+  color: white;
+  background-color: transparent;
+  border: none;
+  width: 100%;
+  text-align: left;
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+.dropdown-menu.right {
+  left: auto;
+  right: 0;
+}

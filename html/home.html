@@ -1,19 +1,59 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
+    <link rel="stylesheet" href="/css/global.css">
     <link rel="stylesheet" href="/css/home.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 </head>
+
 <body>
+
     <nav class="nav-header">
-        <h1>PetFinder MDP</h1>
-        <ul>
+        <div class="nav-left">
+            <i style="font-size: 2.5rem; margin-right: 0.25em;" class="fa-solid fa-paw"></i>
+            <!-- <img src="logo.png" alt="Logo" class="nav-logo" /> -->
+            <h1>PetFinder MDP</h1>
+        </div>
+
+        <ul class="nav-menu">
             <li><a href="index.html">Home</a></li>
-            <li><a href="#">Mascotas</a></li>
-            <li><a href="#">Publicaciones</a></li>
-            <button id="logoutBtn" style="display: none;">Cerrar sesión</button>
+
+            <li class="dropdown">
+                <a href="#"><i style="font-size: 1.5rem;" class="fa-solid fa-right-to-bracket"></i></a>
+                <ul class="dropdown-menu" id="menu-login">
+                    <li><a href="registro.html">Registro</a></li>
+                    <li><a href="login.html">Login</a></li>
+                </ul>
+            </li>
+
+            <li class="dropdown logged-in-only" style="display: none;">
+                <a href="#">Mascotas</a>
+                <ul class="dropdown-menu">
+                    <li><a href="nueva-mascota.html">Nueva Mascota</a></li>
+                    <li><a href="mis-mascotas.html">Mis Mascotas</a></li>
+                </ul>
+            </li>
+
+            <li class="dropdown logged-in-only" style="display: none;">
+                <a href="#">Publicaciones</a>
+                <ul class="dropdown-menu">
+                    <li><a href="nueva-publicacion.html">Nueva Publicación</a></li>
+                    <li><a href="muro.html">Muro</a></li>
+                </ul>
+            </li>
+
+            <li class="dropdown profile-menu logged-in-only" style="display: none;">
+                <a href="#"><i style="font-size: 1.5rem;" class="fa-solid fa-circle-user"></i></a>
+                <ul class="dropdown-menu right">
+                    <li><a href="perfil.html">Mi Perfil</a></li>
+                    <li><a href="terminos.html">Términos y Condiciones</a></li>
+                    <li><button id="logoutBtn">Cerrar sesión</button></li>
+                </ul>
+            </li>
         </ul>
     </nav>
 
@@ -22,51 +62,7 @@
         <p>Esta es la página de Inicio.</p>
     </div>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", async () => {
-            const token = localStorage.getItem("token");
-            const logoutBtn = document.getElementById("logoutBtn");
-
-            if (!token) {
-                // No hay token → redirigir
-                window.location.href = "index.html";
-                return;
-            }
-
-            if (token) {
-                try {
-                    // Realiza una peticion simple GET publicaciones para corroborar si esta logueado, y si tiene rol como MIEMBRO
-                    const response = await fetch("http://localhost:8080/publicaciones", {
-                        method: "GET",
-                        headers: {
-                            "Authorization": "Bearer " + token
-                        }
-                    });
-
-                    if (response.ok) {
-                        // Mostrar botón si token es válido
-                        logoutBtn.style.display = "inline-block";
-                    } else {
-                        // Token inválido → redirigir al index
-                        console.log("Token inválido o error:", response.status);
-                        localStorage.removeItem("token"); // Limpiarlo si está vencido
-                        window.location.href = "index.html";
-                    }
-
-                } catch (error) {
-                    console.error("Error al verificar token:", error);
-                    // Si ocurre un error de red o backend caído, también lo dejamos en index.html
-                    // Token inválido → redirigir al index
-                    window.location.href = "index.html";
-                }
-            }
-
-            // Evento para el botón logout
-            logoutBtn.addEventListener("click", () => {
-                localStorage.removeItem("token"); // Borrar token
-                window.location.href = "index.html"; // Redirigir a login/index
-            });
-        });
-</script>
+    <script src="../js/global.js"></script>
 </body>
+
 </html>
