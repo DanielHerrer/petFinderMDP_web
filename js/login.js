@@ -26,14 +26,19 @@ document.addEventListener("DOMContentLoaded", () => {
             });
 
             if (response.ok) {
+                // Si la consulta es correcta, guarda el body que retorno
                 const data = await response.json();
-                // GUARDAR EL TOKEN ES LOCAL STORAGE NO ES SEGURO (pero es la opcion mas rapida)
-                localStorage.setItem("token", data.token); // Suponiendo que la respuesta trae "token"
+
+                // Se guarda el token del body en el localStorage
+                // GUARDAR EL TOKEN EN LOCAL STORAGE NO ES SEGURO (pero es la opcion mas rapida)
+                localStorage.setItem("token", data.token);
+
                 alert("¡Inicio de sesión exitoso!");
 
                 // Lo redirige a la ubicacion de la ventana Home
                 window.location.href = "../html/home.html";
             } else {
+                // Si la consulta es erronea, guarda el body de error
                 const error = await response.json();
                 alert("Error: " + error.message || "No se pudo iniciar sesión");
             }

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa · PetFinderMDP</title>
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <!-- MAPA -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+        #map {
+            height: 100vh;
+            width: 100%;
+            z-index: 0;
+        }
+
+        .circle-image {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-size: cover;
+            background-position: center;
+            border: 2px solid white;
+            margin-top: -2px;
+            margin-left: -2px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="nav-header">
+        <div class="nav-left">
+            <i style="font-size: 2.5rem; margin-right: 0.25em;" class="fa-solid fa-paw"></i>
+            <!-- <img src="logo.png" alt="Logo" class="nav-logo" /> -->
+            <h1>PetFinder MDP</h1>
+        </div>
+
+        <ul class="nav-menu">
+            <li class="br"><a href="index.html">Home</a></li>
+
+            <li class="br logged-in-only" style="display: none;"><a href="#">Muro</a></li>
+
+            <li class="br logged-in-only" style="display: none;"><a href="mapa.html">Mapa</a></li>
+
+            <li class="dropdown">
+                <a href="#"><i style="font-size: 1.5rem;" class="fa-solid fa-right-to-bracket"></i></a>
+                <ul class="dropdown-menu" id="menu-login">
+                    <li><a href="registro.html">Registro</a></li>
+                    <li><a href="login.html">Iniciar Sesión</a></li>
+                </ul>
+            </li>
+
+            <li class="br dropdown logged-in-only" style="display: none;">
+                <a href="#">Publicaciones</a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">Nueva publicación</a></li>
+                    <li><a href="#">Mis publicaciones</a></li>
+                </ul>
+            </li>
+
+            <li class="dropdown profile-menu logged-in-only" style="display: none;">
+                <a href="#"><i style="font-size: 1.5rem;" class="fa-solid fa-circle-user"></i></a>
+                <ul class="dropdown-menu right">
+                    <li><a href="#">Mi Perfil</a></li>
+                    <li><a href="#">Térm. y Cond.</a></li>
+                    <li><a id="logoutBtn" href="#">Cerrar sesión</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+
+
+    <!-- mapa -->
+    <div id="map"></div>
+
+
+    <!-- SCRIPTS MAPA -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <!-- SCRIPTS PROPIOS -->
+    <script src="../js/global.js"></script>
+    <script src="../js/mapa.js"></script>
+    <!-- <script>
+        const map = L.map('map').setView([-38.0055, -57.5426], 13); // Mar del Plata
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '© OpenStreetMap'
+        }).addTo(map);
+
+        // String descripcion
+        // LocalDate fecha
+        // Long mascotaId
+        // UbicacionDetailDTO ubicacion
+
+        const mascotas = [
+            {
+                id: 1,
+                nombre: "Firulais",
+                direccion: "Av. Colón 1500, Mar del Plata, Argentina",
+                fotoUrl: "https://fotografias.antena3.com/clipping/cmsimages01/2022/08/12/F30768A2-C006-4CF1-8701-6026559DB725/mas-4000-perros-utilizados-experimentos-cientificos-buscan-hogar-adopcion_98.jpg?crop=1920,1080,x0,y0&width=1900&height=1069&optimize=low&format=webply",
+                estado: "PERDIDO"
+            },
+            {
+                id: 2,
+                nombre: "Mishi",
+                direccion: "San Juan 800, Mar del Plata, Argentina",
+                fotoUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Cat_November_2010-1a.jpg/1200px-Cat_November_2010-1a.jpg",
+                estado: "RESCATADO"
+            },
+            {
+                id: 3,
+                nombre: "Pelusa",
+                direccion: "Mitre 123, Mar del Plata, Argentina",
+                fotoUrl: "https://cdn.pixabay.com/photo/2017/02/20/18/03/cat-2083492_960_720.jpg",
+                estado: "PERDIDO"
+            },
+            {
+                id: 4,
+                nombre: "Lima",
+                direccion: "9 de Julio bis 10333, Mar del Plata, Argentina",
+                fotoUrl: "https://cdn.pixabay.com/photo/2017/02/15/12/12/cat-2068462_640.jpg",
+                estado: "RESCATADO"
+            },
+            {
+                id: 5,
+                nombre: "Sumo",
+                direccion: "Chile 2319, Mar del Plata, Argentina",
+                fotoUrl: "https://blog.mascotaysalud.com/wp-content/uploads/2019/09/LABRADOR-RETRIEVER-TUMBADO.jpg",
+                estado: "PERDIDO"
+            },
+            {
+                id: 6,
+                nombre: "Momo",
+                direccion: "San Martin 1928, Mar del Plata, Argentina",
+                fotoUrl: "https://cdn.pixabay.com/photo/2023/01/03/16/00/dog-7694676_640.jpg",
+                estado: "PERDIDO"
+            },
+            {
+                id: 7,
+                nombre: "Rocco",
+                direccion: "20 de Septiembre 2250, Mar del Plata, Argentina",
+                fotoUrl: "https://thumbs.dreamstime.com/b/cierre-de-un-perro-del-alabai-rojo-351827461.jpg",
+                estado: "PERDIDO"
+            }
+        ];
+
+        function geocodeDireccion(direccion) {
+            const url = `https://nominatim.openstreetmap.org/search?format=json&limit=1&q=${encodeURIComponent(direccion)}`;
+            return fetch(url, {
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data && data.length > 0) {
+                        return [parseFloat(data[0].lat), parseFloat(data[0].lon)];
+                    } else {
+                        return null;
+                    }
+                })
+                .catch(() => null);
+        }
+
+        async function agregarMascotasAlMapa() {
+            for (const m of mascotas) {
+                if (m.estado === "REENCONTRADA") {
+                    // No mostrar ni marcador ni círculo
+                    continue;
+                }
+
+                const coords = await geocodeDireccion(m.direccion);
+
+                if (!coords) {
+                    console.warn(`No se pudo geocodificar la dirección de ${m.nombre}: ${m.direccion}`);
+                    continue;
+                }
+
+                const icon = L.divIcon({
+                    className: 'circular-icon',
+                    html: `<div class='circle-image' style="background-image: url('${m.fotoUrl}')"></div>`,
+                    iconSize: [60, 60],
+                    iconAnchor: [30, 30]
+                });
+
+                const marker = L.marker(coords, { icon }).addTo(map);
+
+                marker.bindPopup(`<strong>${m.nombre}</strong><br>${m.direccion}<br><em>Estado: ${m.estado}</em>`);
+
+                // Abrir popup en hover
+                marker.on('mouseover', () => marker.openPopup());
+                marker.on('mouseout', () => marker.closePopup());
+
+                let colorCirculo = 'red'; // PERDIDO por defecto
+                if (m.estado === "RESCATADO") colorCirculo = 'blue';
+
+                L.circle(coords, {
+                    color: colorCirculo,
+                    fillColor: colorCirculo,
+                    fillOpacity: 0.2,
+                    radius: 600,
+                    weight: 1
+                }).addTo(map);
+            }
+        }
+
+        agregarMascotasAlMapa();
+
+    </script> -->
+</body>
+
+</html>

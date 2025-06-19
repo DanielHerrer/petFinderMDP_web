@@ -1,6 +1,14 @@
 document.addEventListener("DOMContentLoaded", async () => {
+    
     const token = localStorage.getItem("token");
+    const loggedInItems = document.querySelectorAll(".logged-in-only");
     const logoutBtn = document.getElementById("logoutBtn");
+
+    // Evento para el botón logout
+    logoutBtn.addEventListener("click", () => {
+        localStorage.removeItem("token"); // Borrar token
+        window.location.href = "index.html"; // Redirigir a login/index
+    });
 
     if (!token) {
         // Si NO hay token y NO estamos en index, login, registro → redirigir
@@ -64,9 +72,4 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     }
 
-    // Evento para el botón logout
-    logoutBtn.addEventListener("click", () => {
-        localStorage.removeItem("token"); // Borrar token
-        window.location.href = "index.html"; // Redirigir a login/index
-    });
 });

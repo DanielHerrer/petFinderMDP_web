@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro Miembro</title>
+    <title>Registro · PetFinderMDP</title>
+    <!-- CSS -->
     <link rel="stylesheet" href="/css/global.css">
     <link rel="stylesheet" href="/css/registro.css">
+    <!-- FONT AWESOME (ICONOS) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 </head>
+
 <body>
 
     <nav class="nav-header">
@@ -18,60 +22,60 @@
         </div>
 
         <ul class="nav-menu">
-            <li><a href="index.html">Home</a></li>
+            <li class="br"><a href="index.html">Home</a></li>
+
+            <li class="br logged-in-only" style="display: none;"><a href="#">Muro</a></li>
+
+            <li class="br logged-in-only" style="display: none;"><a href="mapa.html">Mapa</a></li>
 
             <li class="dropdown">
                 <a href="#"><i style="font-size: 1.5rem;" class="fa-solid fa-right-to-bracket"></i></a>
                 <ul class="dropdown-menu" id="menu-login">
                     <li><a href="registro.html">Registro</a></li>
-                    <li><a href="login.html">Login</a></li>
+                    <li><a href="login.html">Iniciar Sesión</a></li>
                 </ul>
             </li>
 
-            <li class="dropdown logged-in-only" style="display: none;">
-                <a href="#">Mascotas</a>
-                <ul class="dropdown-menu">
-                    <li><a href="nueva-mascota.html">Nueva Mascota</a></li>
-                    <li><a href="mis-mascotas.html">Mis Mascotas</a></li>
-                </ul>
-            </li>
-
-            <li class="dropdown logged-in-only" style="display: none;">
+            <li class="br dropdown logged-in-only" style="display: none;">
                 <a href="#">Publicaciones</a>
                 <ul class="dropdown-menu">
-                    <li><a href="nueva-publicacion.html">Nueva Publicación</a></li>
-                    <li><a href="muro.html">Muro</a></li>
+                    <li><a href="#">Nueva publicación</a></li>
+                    <li><a href="#">Mis publicaciones</a></li>
                 </ul>
             </li>
 
             <li class="dropdown profile-menu logged-in-only" style="display: none;">
                 <a href="#"><i style="font-size: 1.5rem;" class="fa-solid fa-circle-user"></i></a>
                 <ul class="dropdown-menu right">
-                    <li><a href="perfil.html">Mi Perfil</a></li>
-                    <li><a href="terminos.html">Términos y Condiciones</a></li>
-                    <li><button id="logoutBtn">Cerrar sesión</button></li>
+                    <li><a href="#">Mi Perfil</a></li>
+                    <li><a href="#">Térm. y Cond.</a></li>
+                    <li><a id="logoutBtn" href="#">Cerrar sesión</a></li>
                 </ul>
             </li>
         </ul>
     </nav>
 
     <div class="container">
-        
+
         <form id="form-registro" action="#">
             <h2>Registrarse</h2>
             <h5>Sé un miembro de PetFinder</h2>
-                
-            <input id="nombre" name="nombre" type="text" placeholder="Ingrese nombre" required>
-            <input id="apellido" name="apellido" type="text" placeholder="Ingrese apellido" required>
-            <input id="email" name="email" type="email" placeholder="Ingrese su email" required>
-            <input id="contrasenia" name="contrasenia" type="password" placeholder="Ingrese la contraseña" required>
-            <input id="confirmar-contrasenia" name="confirmar-contrasenia" type="password" placeholder="Repita la contraseña" required>
-            <label class="info-contrasenia">Minimo una letra mayuscula, una letra miniscula, un numero, un caracter especial y su longitud debe ser de 6 a 15 caracteres.</label>
-            
-            <button type="submit">Registrar</button>
+
+                <input id="nombre" name="nombre" type="text" placeholder="Ingrese nombre" required>
+                <input id="apellido" name="apellido" type="text" placeholder="Ingrese apellido" required>
+                <input id="email" name="email" type="email" placeholder="Ingrese su email" required>
+                <input id="contrasenia" name="contrasenia" type="password" placeholder="Ingrese la contraseña" required>
+                <input id="confirmar-contrasenia" name="confirmar-contrasenia" type="password"
+                    placeholder="Repita la contraseña" required>
+                <label class="info-contrasenia">Minimo una letra mayuscula, una letra miniscula, un numero, un caracter
+                    especial y su longitud debe ser de 6 a 15 caracteres.</label>
+
+                <button type="submit">Registrar</button>
         </form>
     </div>
+
     <script src="../js/global.js"></script>
     <script src="../js/registro.js"></script>
 </body>
+
 </html>
