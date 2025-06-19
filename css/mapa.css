@@ -1,0 +1,16 @@
+#map {
+    height: 100vh;
+    width: 100%;
+    z-index: 0;
+}
+
+.circle-image {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
+    border: 2px solid white;
+    margin-top: -2px;
+    margin-left: -2px;
+}
