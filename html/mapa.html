@@ -58,9 +58,21 @@
         </ul>
     </nav>
 
-
     <!-- mapa -->
-    <div id="map"></div>
+    <div id="map">
+        <div id="filtros">
+            <div style="display: flex;">
+                <button id="filtroGatos"><i class="fa-solid fa-cat" style="font-size: 1.25em;"></i> Gatos</button>
+                <button id="filtroPerros"><i class="fa-solid fa-dog" style="font-size: 1.25em;"></i> Perros</button>
+            </div>
+            <div style="display: flex;">
+                <button id="filtroPerdidas"><i class="fa-solid fa-circle-question" style="font-size: 1.25em;"></i>
+                    Perdidos</button>
+                <button id="filtroEncontradas"><i class="fa-solid fa-circle-exclamation" style="font-size: 1.25em;"></i>
+                    Encontrados</button>
+            </div>
+        </div>
+    </div>
 
 
     <!-- SCRIPTS MAPA -->
@@ -68,7 +80,7 @@
     <!-- SCRIPTS PROPIOS -->
     <script src="../js/global.js"></script>
     <script src="../js/mapa.js"></script>
-    
+
 </body>
 
 </html>

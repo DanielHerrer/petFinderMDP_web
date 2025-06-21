@@ -37,7 +37,7 @@ body {
 
 .nav-menu li {
   position: relative;
-  z-index: 5; /* para que se muestre x encima del mapa y no se bugea */
+  z-index: 2000; /* para que se muestre x encima del mapa y no se bugea */
 }
 
 /* border right - elementos navegador */
