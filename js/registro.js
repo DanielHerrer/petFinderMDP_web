@@ -43,9 +43,17 @@ document.addEventListener("DOMContentLoaded", () => {
                 alert("¡Registro exitoso!");
                 // Lo redirige a la ubicacion de la ventana Login
                 window.location.href = "../html/login.html";
+            // } else {
+                // const errorData = await response.json();
+                // alert("Error: " + errorData.message);
             } else {
                 const errorData = await response.json();
-                alert("Error: " + errorData.message);
+                if (errorData && errorData.error) {
+                    alert("Error: " + errorData.error);
+                } else {
+                    alert("Ocurrió un error inesperado.");
+                }
+                return;
             }
 
         } catch (error) {

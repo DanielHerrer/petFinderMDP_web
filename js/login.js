@@ -37,11 +37,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 // Lo redirige a la ubicacion de la ventana Home
                 window.location.href = "../html/home.html";
-            } else {
+            // } else {
                 // Si la consulta es erronea, guarda el body de error
-                const error = await response.json();
-                alert("Error: " + error.message || "No se pudo iniciar sesión");
+                // const error = await response.json();
+                // alert("Error: " + error.message || "No se pudo iniciar sesión");
+            } else {
+                const errorData = await response.json();
+                if (errorData && errorData.error) {
+                    alert("Error: " + errorData.error);
+                } else {
+                    alert("Ocurrió un error inesperado.");
+                }
+                return;
             }
+            
         } catch (err) {
             alert("Error de red o del servidor");
             console.error(err);

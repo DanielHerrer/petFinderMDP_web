@@ -134,62 +134,6 @@ document.addEventListener("DOMContentLoaded", async () => {
             .catch(() => null);
     }
 
-    // Funcion que recibe una lista de publicaciones y una lista de mascotas, y lo agrega al mapa visualmente
-    async function agregarMascotasAlMapa(publicaciones) {
-
-        for (const p of publicaciones) {
-
-            // Si ya fue reencontrada o es inactiva entonces no se muestra
-            if (p.mascota.estadoMascota === "REENCONTRADA" || p.mascota.esActivo === false) {
-                // No mostrar ni marcador ni círculo
-                continue;
-            }
-
-            // Arma una cadena (ej: "Rivadavia 3470")
-            const calle = p.ubicacion.direccion + " " + p.ubicacion.altura;
-            // Consigue las Coordenadas de la Direccion
-            // (ej: "Rivadavia 3470, Mar del Plata, Buenos Aires, Argentina")
-            const coords = await geocodeDireccion(calle + ", Mar del Plata, Buenos Aires, Argentina");
-
-            // Si la ubicacion es invalida
-            if (!coords) {
-                console.warn(`No se pudo geocodificar la ubicación: ${calle}`);
-                continue;
-            }
-
-            // Si la ubicacion es exitosa, procede a dibujar el punto en el mapa
-            const icon = L.divIcon({
-                className: 'circular-icon',
-                html: `<div class='circle-image' style="background-image: url('${p.mascota.fotoUrl}')"></div>`,
-                iconSize: [60, 60],
-                iconAnchor: [30, 30] // 30, 30 
-            });
-            // Le configura las coordenadas al punto
-            const marker = L.marker(coords, { icon }).addTo(map);
-            // Si existe un nombre, se muestra el nombre, SINO, se muestra "Sin nombre"
-            marker.bindPopup(`<strong>
-                ${p.mascota.nombre && p.mascota.nombre.trim() !== "" ? p.mascota.nombre : "Sin nombre"}</strong>
-                <br>${calle}<br>
-                <em>Estado: ${p.mascota.estadoMascota}</em>`);
-            // Abrir un "popup" con un CARTEL de informacion al hacer "hover" sobre el punto
-            marker.on('mouseover', () => marker.openPopup());
-            marker.on('mouseout', () => marker.closePopup());
-            // Le configura ROJO como Mascota PERDIDA por defecto 
-            let colorCirculo = 'red';
-            // Le configura AZUL si la Mascota es ENCONTRADA
-            if (p.mascota.estadoMascota === "ENCONTRADA") colorCirculo = 'blue';
-
-            // Añade el punto al mapa
-            L.circle(coords, {
-                color: colorCirculo,
-                fillColor: colorCirculo,
-                fillOpacity: 0.2,
-                radius: 700,
-                weight: 1
-            }).addTo(map);
-        }
-    }
-
     function actualizarEstiloBoton(boton, activo) {
         if (activo) {
             boton.classList.remove("inactivo");
