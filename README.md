@@ -1,4 +1,8 @@
 # Pet Finder MDP Web
+Ésta web se conecta a una <a href="https://github.com/SofiaCantalupi/petFinderMDP">API realizada con fines academicos</a>. Cualquier otra implementacion desde otra maquina requerirá cambios a su 'application properties'.
+
+## Requisitos
+- Visual Studio Code
 
 ## Instrucciones para ejecutar
 
