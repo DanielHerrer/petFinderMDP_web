@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", async () => {
-    
+
     const token = localStorage.getItem("token");
     const loggedInItems = document.querySelectorAll(".logged-in-only");
     const logoutBtn = document.getElementById("logoutBtn");
@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     // Evento para el botón logout
     logoutBtn.addEventListener("click", () => {
         localStorage.removeItem("token"); // Borrar token
-        window.location.href = "index.html"; // Redirigir a login/index
+        window.location.href = "../index.html"; // Redirigir a login/index
     });
 
     if (!token) {
@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             !window.location.pathname.endsWith("registro.html") &&
             !window.location.pathname.endsWith("login.html")) {
 
-            window.location.href = "index.html";
+            window.location.href = "../index.html";
         }
 
     } else if (token) {
@@ -36,6 +36,12 @@ document.addEventListener("DOMContentLoaded", async () => {
             if (response.ok) {
                 // Si el token es válido
 
+                // Si intenta a ir a INDEX que lo redirija a HOME
+                if (window.location.pathname.endsWith("index.html")) {
+
+                    window.location.href = "../html/home.html";
+                }
+
                 // Mostrar items del nav
                 loggedInItems.forEach(el => el.style.display = "block");
                 document.getElementById("menu-login").parentElement.style.display = "none";
@@ -51,7 +57,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                     !window.location.pathname.endsWith("registro.html") &&
                     !window.location.pathname.endsWith("login.html")) {
 
-                    window.location.href = "index.html";
+                    window.location.href = "../index.html";
                 }
             }
 
@@ -67,7 +73,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 !window.location.pathname.endsWith("registro.html") &&
                 !window.location.pathname.endsWith("login.html")) {
 
-                window.location.href = "index.html";
+                window.location.href = "../index.html";
             }
         }
     }
