@@ -1,5 +1,8 @@
 document.addEventListener("DOMContentLoaded", async () => {
 
+    // Setear el valor de cargando..
+    let cargando = false;
+
     // Setea los FILTROS con un valor de entrada
     const filtrosActivos = {
         tipoMascota: {
@@ -87,6 +90,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         // Concatena el valor Bearer token almacenado en localStorage
         const token = localStorage.getItem("token");
 
+        mostrarSpinner(); // Mostrar spinner de "Cargando" desde el principio
+
         // Recibe el resultado de las Publicaciones
         const publicacionesRes = await fetch("http://localhost:8080/publicaciones", {
             method: "GET",
@@ -98,9 +103,9 @@ document.addEventListener("DOMContentLoaded", async () => {
         // Si la consulta es exitosa (HTTP 200 - 299)
         if (publicacionesRes.ok) {
             // Extrae el array de Publicaciones de la consulta
-            publicaciones = await publicacionesRes.json(); // array de objetos
+            // publicaciones = await publicacionesRes.json(); // array de objetos
 
-            console.log("Publicaciones:", publicaciones);
+            //console.log("Publicaciones:", publicaciones);
 
             // Llama a la funcion y dibuja las mascotas en el mapa
             renderizarMapa();
@@ -134,6 +139,20 @@ document.addEventListener("DOMContentLoaded", async () => {
             .catch(() => null);
     }
 
+    function mostrarSpinner() {
+        document.getElementById("spinner").style.display = "flex";
+    }
+
+    function ocultarSpinner() {
+        document.getElementById("spinner").style.display = "none";
+    }
+
+    function bloquearBotones(bloquear) {
+        [btnGatos, btnPerros, btnPerdidas, btnEncontradas].forEach(btn => {
+            btn.disabled = bloquear;
+        });
+    }
+
     function actualizarEstiloBoton(boton, activo) {
         if (activo) {
             boton.classList.remove("inactivo");
@@ -144,7 +163,102 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     }
 
+    // nueva funcion
     async function renderizarMapa() {
+        if (cargando) return;
+        cargando = true;
+        bloquearBotones(true);
+        mostrarSpinner();
+
+        // Limpiar marcadores anteriores
+        marcadores.forEach(m => map.removeLayer(m));
+        circulos.forEach(c => map.removeLayer(c));
+        marcadores = [];
+        circulos = [];
+
+        const token = localStorage.getItem("token");
+        const tipoFiltro = filtrosActivos.tipoMascota;
+        const estadoFiltro = filtrosActivos.estadoMascota;
+
+        const tipoSeleccionado = Object.entries(tipoFiltro).find(([_, v]) => v)?.[0]; // GATO o PERRO
+        const estadoSeleccionado = Object.entries(estadoFiltro).find(([_, v]) => v)?.[0]; // PERDIDA o ENCONTRADA
+
+        let publicacionesFiltradas = [];
+
+        try {
+            if (tipoSeleccionado && estadoSeleccionado) {
+                // Filtrado combinado (ej: GATO + PERDIDA)
+                const res = await fetch (`http://localhost:8080/publicaciones/filtro?tipoMascota=${tipoSeleccionado}&estadoMascota=${estadoSeleccionado}`, {
+                    headers: { "Authorization": "Bearer " + token }
+                });
+                publicacionesFiltradas = res.ok ? await res.json() : [];
+
+            } else if (tipoSeleccionado) {
+                // Solo filtro de TIPO MASCOTA (ej: PERRO)
+                const res = await fetch(`http://localhost:8080/publicaciones/tipoMascota/${tipoSeleccionado}`, {
+                    headers: { "Authorization": "Bearer " + token }
+                });
+                publicacionesFiltradas = res.ok ? await res.json() : [];
+
+            } else if (estadoSeleccionado) {
+                // Solo filtro de ESTADO MASCOTA (ej: ENCONTRADA)
+                const res = await fetch(`http://localhost:8080/publicaciones/estadoMascota/${estadoSeleccionado}`, {
+                    headers: { "Authorization": "Bearer " + token }
+                });
+                publicacionesFiltradas = res.ok ? await res.json() : [];
+
+            } else {
+                // Sin filtros, traer todas las publicaciones
+                const res = await fetch("http://localhost:8080/publicaciones", {
+                    headers: { "Authorization": "Bearer " + token }
+                });
+                publicacionesFiltradas = res.ok ? await res.json() : [];
+            }
+
+            for (const p of publicacionesFiltradas) {
+                if (p.mascota.estadoMascota === "REENCONTRADA" || p.mascota.esActivo === false) continue;
+
+                const calle = `${p.ubicacion.direccion} ${p.ubicacion.altura}, Mar del Plata, Buenos Aires, Argentina`;
+                const coords = await geocodeDireccion(calle);
+                if (!coords) continue;
+
+                const icon = L.divIcon({
+                    className: 'circular-icon',
+                    html: `<div class='circle-image' style="background-image: url('${p.mascota.fotoUrl}')"></div>`,
+                    iconSize: [60, 60],
+                    iconAnchor: [30, 30]
+                });
+
+                const marker = L.marker(coords, { icon }).addTo(map);
+                marker.bindPopup(`<strong>${p.mascota.nombre || "Sin nombre"}</strong><br>${p.ubicacion.direccion} ${p.ubicacion.altura}<br>${p.mascota.tipoMascota}<br><em>Estado: ${p.mascota.estadoMascota}</em>`);
+                marker.on('mouseover', () => marker.openPopup());
+                marker.on('mouseout', () => marker.closePopup());
+                marcadores.push(marker);
+
+                let colorCirculo = p.mascota.estadoMascota === "ENCONTRADA" ? "blue" : "red";
+                const circle = L.circle(coords, {
+                    color: colorCirculo,
+                    fillColor: colorCirculo,
+                    fillOpacity: 0.2,
+                    radius: 700,
+                    weight: 1
+                }).addTo(map);
+
+                circulos.push(circle);
+            }
+
+        } catch (error) {
+            console.error("Error al renderizar el mapa:", error);
+        } finally {
+            ocultarSpinner();
+            cargando = false;
+            bloquearBotones(false);
+        }
+    }
+
+
+    // vieja funcion
+    async function renderizarMapaOld() {
         // Eliminar marcadores y círculos anteriores
         marcadores.forEach(m => map.removeLayer(m));
         circulos.forEach(c => map.removeLayer(c));
