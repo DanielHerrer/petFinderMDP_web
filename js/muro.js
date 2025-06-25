@@ -15,17 +15,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     };
 
-    // Setea arrays vacios que sirven para ser reutilizados dentro del codigo
-    let marcadores = [];
-    let circulos = [];
-
-    // Recibe el mapa y lo configura
-    const map = L.map('map').setView([-38.0055, -57.5426], 13); // Mar del Plata
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19,
-        attribution: '© OpenStreetMap'
-    }).addTo(map);
-
     // Recibe los botones
     const btnGatos = document.getElementById("filtroGatos");
     const btnPerros = document.getElementById("filtroPerros");
@@ -46,7 +35,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         actualizarEstiloBoton(btnGatos, filtros.GATO);
         actualizarEstiloBoton(btnPerros, filtros.PERRO);
-        renderizarMapa();
+        renderizarMuro();
     }
 
     function alternarEstado(seleccion) {
@@ -62,7 +51,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         actualizarEstiloBoton(btnPerdidas, filtros.PERDIDA);
         actualizarEstiloBoton(btnEncontradas, filtros.ENCONTRADA);
-        renderizarMapa();
+        renderizarMuro();
     }
 
 
@@ -102,8 +91,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         // Si la consulta es exitosa (HTTP 200 - 299)
         if (publicacionesRes.ok) {
 
-            // Llama a la funcion y dibuja las mascotas en el mapa
-            renderizarMapa();
+            // Llama a la funcion y llena el muro
+            renderizarMuro();
 
         } else {
             console.error("Token inválido o error en la API");
@@ -113,25 +102,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         // Si ocurre un error de red o backend caído
         console.error("Error en mapa.js = ", error);
 
-    }
-
-    // Funcion que retorna las coordenadas segun la direccion recibida
-    function geocodeDireccion(direccion) {
-        const url = `https://nominatim.openstreetmap.org/search?format=json&limit=1&q=${encodeURIComponent(direccion)}`;
-        return fetch(url, {
-            headers: {
-                'Accept': 'application/json'
-            }
-        })
-            .then(res => res.json())
-            .then(data => {
-                if (data && data.length > 0) {
-                    return [parseFloat(data[0].lat), parseFloat(data[0].lon)];
-                } else {
-                    return null;
-                }
-            })
-            .catch(() => null);
     }
 
     function mostrarSpinner() {
@@ -158,23 +128,23 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     }
 
-    // nueva funcion
-    async function renderizarMapa() {
+    async function renderizarMuro() {
         if (cargando) return;
         cargando = true;
         bloquearBotones(true);
         mostrarSpinner();
 
         // Limpiar marcadores anteriores
-        marcadores.forEach(m => map.removeLayer(m));
-        circulos.forEach(c => map.removeLayer(c));
-        marcadores = [];
-        circulos = [];
+
+        // marcadores.forEach(m => map.removeLayer(m));
+        // circulos.forEach(c => map.removeLayer(c));
+        // marcadores = [];
+        // circulos = [];
 
         const token = localStorage.getItem("token");
+
         const tipoFiltro = filtrosActivos.tipoMascota;
         const estadoFiltro = filtrosActivos.estadoMascota;
-
         const tipoSeleccionado = Object.entries(tipoFiltro).find(([_, v]) => v)?.[0]; // GATO o PERRO
         const estadoSeleccionado = Object.entries(estadoFiltro).find(([_, v]) => v)?.[0]; // PERDIDA o ENCONTRADA
 
@@ -183,7 +153,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         try {
             if (tipoSeleccionado && estadoSeleccionado) {
                 // Filtrado combinado (ej: GATO + PERDIDA)
-                const res = await fetch (`http://localhost:8080/publicaciones/filtro?tipoMascota=${tipoSeleccionado}&estadoMascota=${estadoSeleccionado}`, {
+                const res = await fetch(`http://localhost:8080/publicaciones/filtro?tipoMascota=${tipoSeleccionado}&estadoMascota=${estadoSeleccionado}`, {
                     headers: { "Authorization": "Bearer " + token }
                 });
                 publicacionesFiltradas = res.ok ? await res.json() : [];
@@ -210,40 +180,41 @@ document.addEventListener("DOMContentLoaded", async () => {
                 publicacionesFiltradas = res.ok ? await res.json() : [];
             }
 
+            const contenedor = document.getElementById("contenedor-publicaciones");
+            contenedor.innerHTML = ""; // Limpiar publicaciones previas
+
             for (const p of publicacionesFiltradas) {
                 if (p.mascota.estadoMascota === "REENCONTRADA" || p.mascota.esActivo === false) continue;
 
-                const calle = `${p.ubicacion.direccion} ${p.ubicacion.altura}, Mar del Plata, Buenos Aires, Argentina`;
-                const coords = await geocodeDireccion(calle);
-                if (!coords) continue;
+                const titulo = `${p.mascota.tipoMascota} (Mascota ${p.mascota.estadoMascota})`;
+                const fotoUrl = p.mascota.fotoUrl;
+                const nombreMascota = p.mascota.nombre || "Sin nombre";
+                const calle = `${p.ubicacion.direccion} ${p.ubicacion.altura}`;
+                const descripcion = p.descripcion;
+                const autor = p.nombreCompleto;
+                const fecha = p.fecha;
 
-                const icon = L.divIcon({
-                    className: 'circular-icon',
-                    html: `<div class='circle-image' style="background-image: url('${p.mascota.fotoUrl}')"></div>`,
-                    iconSize: [60, 60],
-                    iconAnchor: [30, 30]
-                });
+                const div = document.createElement("div");
+                div.classList.add("publicacion");
 
-                const marker = L.marker(coords, { icon }).addTo(map);
-                marker.bindPopup(`<strong>${p.mascota.nombre || "Sin nombre"}</strong><br>${p.ubicacion.direccion} ${p.ubicacion.altura}<br>${p.mascota.tipoMascota}<br><em>Estado: ${p.mascota.estadoMascota}</em>`);
-                marker.on('mouseover', () => marker.openPopup());
-                marker.on('mouseout', () => marker.closePopup());
-                marcadores.push(marker);
+                div.innerHTML = `
+                    <h4>${titulo}</h4>
+                    <img src="${fotoUrl}" alt="Foto de ${nombreMascota}">
+                    <div class="info">
+                        <strong>${nombreMascota}</strong>
+                        <div class="direccion">${calle}</div>
+                        <div class="descripcion">${descripcion}</div>
+                    </div>
+                    <div class="pie">
+                        Publicado por <strong>${autor}</strong> el ${fecha}
+                    </div>
+                `;
 
-                let colorCirculo = p.mascota.estadoMascota === "ENCONTRADA" ? "blue" : "red";
-                const circle = L.circle(coords, {
-                    color: colorCirculo,
-                    fillColor: colorCirculo,
-                    fillOpacity: 0.2,
-                    radius: 700,
-                    weight: 1
-                }).addTo(map);
-
-                circulos.push(circle);
+                contenedor.appendChild(div);
             }
 
         } catch (error) {
-            console.error("Error al renderizar el mapa:", error);
+            console.error("Error al renderizar el muro:", error);
         } finally {
             ocultarSpinner();
             cargando = false;

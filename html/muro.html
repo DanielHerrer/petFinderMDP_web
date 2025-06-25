@@ -4,11 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home · PetFinderMDP</title>
+    <title>Muro · PetFinderMDP</title>
     <link rel="icon" type="image/png" href="../img/paw-solid.svg">
     <!-- CSS -->
     <link rel="stylesheet" href="../css/global.css">
-    <link rel="stylesheet" href="../css/home.css">
+    <link rel="stylesheet" href="../css/muro.css">
     <!-- FONT AWESOME (ICONOS) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 </head>
@@ -57,12 +57,31 @@
     </nav>
 
     <div class="container">
-        <h2>Bienvenido a la Página de Inicio</h2>
-        <p>Esta es la página de Inicio.</p>
+        <div id="spinner" class="spinner-overlay" style="display: none;">
+            <div class="spinner"></div>
+            <p>Cargando muro...</p>
+        </div>
+        <div id="filtros">
+            <div style="display: flex;">
+                <button id="filtroGatos"><i class="fa-solid fa-cat" style="font-size: 1.25em;"></i> Gatos</button>
+                <button id="filtroPerros"><i class="fa-solid fa-dog" style="font-size: 1.25em;"></i> Perros</button>
+            </div>
+            <div style="display: flex;">
+                <button id="filtroPerdidas"><i class="fa-solid fa-circle-question" style="font-size: 1.25em;"></i>
+                    Perdidos</button>
+                <button id="filtroEncontradas"><i class="fa-solid fa-circle-exclamation" style="font-size: 1.25em;"></i>
+                    Encontrados</button>
+            </div>
+        </div>
+        
+        <!-- Contenedor para las publicaciones -->
+        <div id="contenedor-publicaciones" class="muro-publicaciones"></div>
+    
     </div>
 
     <!-- SCRIPTS PROPIOS -->
     <script src="../js/global.js"></script>
+    <script src="../js/muro.js"></script>
 </body>
 
 </html>
