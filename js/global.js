@@ -78,4 +78,27 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     }
 
+    // BUTTONS
+
+    // Mostrar el botón "arriba" solo cuando el usuario está cerca del fondo
+    const scrollTopBtn = document.getElementById("scrollTopBtn");
+    scrollTopBtn.style.display = "none";
+
+    window.addEventListener("scroll", () => {
+        if (window.scrollY > 500) { // aparece después de bajar px
+            scrollTopBtn.style.display = "flex";
+        } else {
+            scrollTopBtn.style.display = "none";
+        }
+    });
+
+    // Al hacer clic, vuelve al header
+    scrollTopBtn.addEventListener("click", () => {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    });
+
 });
+

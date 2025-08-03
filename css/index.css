@@ -1,8 +1,55 @@
+.main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5em;
+
+    padding: 1.5em 10em 4em 10em;
+}
+
 .container {
-    max-width: 400px;
-    margin: 40px auto;
-    padding: 30px;
-    background-color: #fff3e0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2em;
+
+    width: fit-content;
+    
+    padding: 2em;
+    background-color: #ffebcc;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.welcome {
+    flex-direction: column;
+    gap: 0.25em;
+
+    width: fit-content;
+    background-color: #ffcd7c;
+}
+
+.container-img {
+    margin: 0;
+    padding: 0;
+
+    height: 12.5em;
+    border-radius: 5px;
+}
+
+.container-title {
+    margin: 0;
+    padding: 0;
+    font-size: 2rem;
+}
+
+.container-p {
+    margin: 0;
+    padding: 0;
+    font-size: 1.2rem;
+}
+
+.p-2 {
+    text-align: end;
 }
