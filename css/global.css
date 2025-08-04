@@ -9,10 +9,10 @@ body {
 
   background-image:
     linear-gradient(155deg,
-      #fff9f1 0%,
-      #ffedcb 33%,
-      #ffd7bc 66%,
-      #ffbf97 100%);
+      #ffffff 0%,
+      #ffc55b 33%,
+      #e3b9ff 66%,
+      #38174b 100%);
 
 }
 
@@ -28,6 +28,9 @@ body {
 .nav-left {
   display: flex;
   align-items: center;
+
+  text-decoration: none; 
+  color: #fff;
 }
 
 .nav-logo {
@@ -172,3 +175,40 @@ body {
   margin: 0;
   padding: 0;
 }
+
+.footer-row a {
+  color: rgb(0, 0, 0);
+  /* text-decoration: none; */
+}
+
+/* RESPONSIVE CSS*/
+/*-------------------------------------------------------------------------------------------------------------------- */
+
+@media (max-width: 575px) {
+
+  .nav-header {
+    padding: 5px 10px 15px 10px;
+    flex-direction: column;
+    font-size: 0.9rem;
+  }
+
+  .footer-row p {
+    text-align: center;
+  }
+}
+
+/*-------------------------------------------------------------------------------------------------------------------- */
+
+@media (min-width: 576px) and (max-width: 767px) {
+  .footer-row p {
+    text-align: center;
+  }
+}
+
+/*-------------------------------------------------------------------------------------------------------------------- */
+/* Estilos para tablets grandes */
+@media (min-width: 768px) and (max-width: 991px) {}
+
+/*-------------------------------------------------------------------------------------------------------------------- */
+/* 6. Escritorio */
+@media (min-width: 992px) {}

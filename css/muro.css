@@ -1,8 +1,7 @@
 .container {
-    width: 50%;
+    width: 100%;
     margin: 0 auto;
     padding: 10px 30px;
-    background-color: #fff3e0;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -69,7 +68,11 @@
     justify-content: center;
     gap: 7.5px;
     transition: background-color 0.2s;
-    box-shadow: 0 0 15px rgba(0,0,0,0.15);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
+}
+
+.filtro {
+    display: flex;
 }
 
 .activo {
@@ -126,3 +129,49 @@
     font-size: 0.85em;
     color: #777;
 }
+
+/* RESPONSIVE CSS*/
+/*-------------------------------------------------------------------------------------------------------------------- */
+
+@media (max-width: 575px) {
+
+    /* BOTONES DE FILTRADO _________________________________ */
+    #filtros {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        /* opcional, separación entre botones */
+    }
+
+    .filtro {
+        justify-content: center;
+    }
+
+    .container {
+        width: 100%;
+        margin: 0 auto;
+        padding: 10px 0;
+    }
+
+    .publicacion {
+        border-radius: 0;
+    }
+
+    .publicacion img {
+        width: 100%;
+        height: 250px;
+    }
+
+}
+
+/*-------------------------------------------------------------------------------------------------------------------- */
+
+@media (min-width: 576px) and (max-width: 767px) {}
+
+/*-------------------------------------------------------------------------------------------------------------------- */
+/* Estilos para tablets grandes */
+@media (min-width: 768px) and (max-width: 991px) {}
+
+/*-------------------------------------------------------------------------------------------------------------------- */
+/* 6. Escritorio */
+@media (min-width: 992px) {}

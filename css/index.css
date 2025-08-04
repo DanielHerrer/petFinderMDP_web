@@ -15,11 +15,11 @@
     gap: 2em;
 
     width: fit-content;
-    
+
     padding: 2em;
     background-color: #ffebcc;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
 }
 
 .welcome {
@@ -27,7 +27,6 @@
     gap: 0.25em;
 
     width: fit-content;
-    background-color: #ffcd7c;
 }
 
 .container-img {
@@ -53,3 +52,91 @@
 .p-2 {
     text-align: end;
 }
+
+/* RESPONSIVE CSS*/
+/*-------------------------------------------------------------------------------------------------------------------- */
+
+@media (max-width: 575px) {
+    .main-container {
+        padding: 1.5em 1em 4em 1em;
+    }
+
+    .container {
+        flex-direction: column;
+        padding: 1.5em;
+    }
+
+    .welcome {
+        padding: 1em 1.25em;
+        text-align: center;
+    }
+
+
+    .container-title {
+        font-size: 1.5rem;
+    }
+
+    .container-p {
+        font-size: 1rem;
+    }
+
+}
+
+/*-------------------------------------------------------------------------------------------------------------------- */
+
+@media (min-width: 576px) and (max-width: 767px) {
+
+    .main-container {
+        padding: 1.5em 1em 4em 1em;
+    }
+
+    .container {
+        flex-direction: column;
+        padding: 1.5em;
+
+    }
+
+    .welcome {
+        padding: 1em;
+        text-align: center;
+    }
+
+    .container-title {
+        font-size: 1.5rem;
+    }
+
+    .container-p {
+        font-size: 1rem;
+    }
+}
+
+/*-------------------------------------------------------------------------------------------------------------------- */
+/* Estilos para tablets grandes */
+@media (min-width: 768px) and (max-width: 991px) {
+
+    .main-container {
+        padding: 1.5em 1em 4em 1em;
+    }
+
+    .container {
+        padding: 2em;
+    }
+
+    .welcome {
+        padding: 1em;
+        text-align: center;
+    }
+
+    .container-title {
+        font-size: 1.5rem;
+    }
+
+    .container-p {
+        font-size: 1rem;
+    }
+
+}
+
+/*-------------------------------------------------------------------------------------------------------------------- */
+/* 6. Escritorio */
+@media (min-width: 992px) {}

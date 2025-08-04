@@ -1,14 +1,14 @@
-
 .container {
     max-width: 400px;
     margin: 40px auto;
     padding: 30px;
-    background-color: #fff3e0;
+    background-color: #fff9f1;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-#form-login h2, h5 {
+#form-login h2,
+h5 {
     margin: 0.5rem;
     text-align: center;
     color: #ef6c00;
@@ -39,4 +39,37 @@
 
 #form-login button:hover {
     background-color: #ef6c00;
+}
+
+/* RESPONSIVE CSS*/
+/*-------------------------------------------------------------------------------------------------------------------- */
+
+@media (max-width: 575px) {
+    .container {
+        margin: 5em 1em;
+    }
+}
+
+/*-------------------------------------------------------------------------------------------------------------------- */
+
+@media (min-width: 576px) and (max-width: 767px) {
+    .container {
+        margin: 2em auto;
+    }
+}
+
+/*-------------------------------------------------------------------------------------------------------------------- */
+/* Estilos para tablets grandes */
+@media (min-width: 768px) and (max-width: 991px) {
+    .container {
+        margin: 11em auto;
+    }
+}
+
+/*-------------------------------------------------------------------------------------------------------------------- */
+/* 6. Escritorio */
+@media (min-width: 992px) {
+    .container {
+        margin: 7em auto;
+    }
 }

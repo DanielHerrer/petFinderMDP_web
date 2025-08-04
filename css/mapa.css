@@ -45,19 +45,25 @@
 }
 
 @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 /* BOTONES DE FILTRADO _________________________________ */
 #filtros {
-    position: absolute; 
-    top: 10px; 
+    position: absolute;
+    top: 10px;
     left: 50%;
     transform: translateX(-50%);
     z-index: 1000;
     display: flex;
-    gap: 20px; /* opcional, separación entre botones */
+    gap: 20px;
+    /* opcional, separación entre botones */
 }
 
 #filtros button {
@@ -74,6 +80,10 @@
     transition: background-color 0.2s;
 }
 
+.filtro {
+    display: flex;
+}
+
 .activo {
     background-color: rgb(240, 110, 24);
     color: white;
@@ -84,3 +94,33 @@
     color: #000;
     border: 1px solid #ccc;
 }
+
+/* RESPONSIVE CSS*/
+/*-------------------------------------------------------------------------------------------------------------------- */
+
+@media (max-width: 575px) {
+
+    /* BOTONES DE FILTRADO _________________________________ */
+    #filtros {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        /* opcional, separación entre botones */
+    }
+
+    .filtro {
+        justify-content: center;
+    }
+}
+
+/*-------------------------------------------------------------------------------------------------------------------- */
+
+@media (min-width: 576px) and (max-width: 767px) {}
+
+/*-------------------------------------------------------------------------------------------------------------------- */
+/* Estilos para tablets grandes */
+@media (min-width: 768px) and (max-width: 991px) {}
+
+/*-------------------------------------------------------------------------------------------------------------------- */
+/* 6. Escritorio */
+@media (min-width: 992px) {}
