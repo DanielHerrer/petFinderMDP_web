@@ -16,11 +16,11 @@
 <body>
 
     <nav class="nav-header">
-            <a href="./index.html" class="nav-left">
-                <i style="font-size: 2.5rem; margin-right: 0.25em;" class="fa-solid fa-paw"></i>
-                <!-- <img src="logo.png" alt="Logo" class="nav-logo" /> -->
-                <h1>PetFinder MDP</h1>
-            </a>
+        <a href="./index.html" class="nav-left">
+            <i style="font-size: 2.5rem; margin-right: 0.25em;" class="fa-solid fa-paw"></i>
+            <!-- <img src="logo.png" alt="Logo" class="nav-logo" /> -->
+            <h1>PetFinder MDP</h1>
+        </a>
 
         <ul class="nav-menu">
             <li class="br"><a href="index.html">Home</a></li>
@@ -63,10 +63,41 @@
         </button>
     </div>
 
+    <!-- ACA CARRUSEL -->
+    <div class="carousel">
+        <button class="carousel-btn prev"><i class="fa-regular fa-circle-left"></i></button>
+
+        <div class="carousel-track">
+            <div class="carousel-slide active">
+                <img src="../img/map_1.jpg" alt="Mapa">
+            </div>
+            <div class="carousel-slide">
+                <img src="../img/map_2.jpg" alt="Mapa">
+            </div>
+            <div class="carousel-slide">
+                <img src="../img/map_3.jpg" alt="Mapa">
+            </div>
+            <div class="carousel-slide">
+                <img src="../img/map_4.jpg" alt="Mapa">
+            </div>
+        </div>
+
+        <button class="carousel-btn next"><i class="fa-regular fa-circle-right"></i></button>
+
+        <div class="carousel-dots">
+            <span class="dot active"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+        </div>
+    </div>
+
+
     <div class="main-container">
         <div class="container welcome">
             <h2 class="container-title">Bienvenid@ a PetFinderMDP</h2>
-            <p class="container-p">Buscandoles un hogar a gatos y perros, <span
+            <p class="container-p">Buscando hogares a gatos y perros.</p>
+            <p class="container-p"><span
                     style="color: #fff; background-color: rgb(255, 87, 87); padding: 2px 8px; border-radius: 3px;">PERDIDOS</span>
                 y <span
                     style="color: #fff; background-color: rgb(87, 140, 255); padding: 2px 8px; border-radius: 3px;">ENCONTRADOS</span>.
@@ -82,13 +113,13 @@
             </p>
         </div>
 
-        <div class="container">
+        <div class="container p-inv">
+            <img src="./img/cat_3.jpg" class="container-img" alt="Perro bonito">
             <p class="container-p p-2">A veces, nuestras mascotas simplemente pierden noción de su entorno, sus
                 emociones son tan intensas que se impulsan por sus instintos, deciden buscar nuevos horizontes y
                 explorar. Luego no saben cómo regresar a casa. <b>PetFinderMDP</b> te ofrece
                 un mapa dinámico con zonas de calor para cada mascota registrada en nuestra web, con un sistema de
                 filtrado que permite encontrar a tu mascota con más precisión.</p>
-            <img src="./img/cat_3.jpg" class="container-img" alt="Perro bonito">
         </div>
 
         <div class="container">
@@ -98,13 +129,13 @@
                 el favor de conseguirle una placa de identificación con un medio de contacto.</p>
         </div>
 
-        <div class="container">
+        <div class="container p-inv">
+            <img src="./img/dog_2.jpg" class="container-img" alt="Perro bonito">
             <p class="container-p p-2">¿Qué esperás? Registrate en <b>PetFinderMDP</b> y verificalo por vos mism@.
                 Disponemos de un muro de publicaciónes y un mapa interactivo. Sólo miembros pueden realizar
                 publicaciones en caso de
                 urgencia y búsqueda, o por el contrario, publicar si encontraste una mascota perdida de nuestros
                 usuarios.</p>
-            <img src="./img/dog_2.jpg" class="container-img" alt="Perro bonito">
         </div>
     </div>
 
@@ -112,27 +143,34 @@
         <div class="footer-row row-1">
             <i class="fa-solid fa-paw"></i>
             <h4>PetFinder · Mar del Plata</h4>
-            <p>Buscandoles un hogar a gatos y perros, perdidos y encontrados.</p>
+            <p>Buscando hogares a gatos y perros, perdidos y encontrados.</p>
         </div>
         <div class="footer-row row-2">
+
+            <p>Creado por estudiantes de UTN:</p>
+            <p><a href="https://danielherrer.github.io/me" class="link-creador" target="_blank"
+                    rel="noopener noreferrer">Daniel Herrera</a></p>
+
+            <p><a href="https://github.com/SofiaCantalupi" class="link-creador" target="_blank"
+                    rel="noopener noreferrer">Sofia Cantalupi</a></p>
+            <p><a href="https://github.com/leoColmeck" class="link-creador" target="_blank"
+                    rel="noopener noreferrer">Leonel Benavides</a></p>
+            <p><a href="https://github.com/FrancoCancino" class="link-creador" target="_blank"
+                    rel="noopener noreferrer">Franco Cancino</a>.</p>
+        </div>
+        <div class="footer-row row-3">
             <p class="copyright">Copyright PetFinderMDP · 2025.</p>
             <p>Todos los derechos reservados.</p>
             <p><a href="https://github.com/SofiaCantalupi/petFinderMDP" target="_blank"
-                    rel="noopener noreferrer">Proyecto final</a> de Programación 3, UTN.</p>
-            <p>Creado por:</p>
-            <p><a href="https://danielherrer.github.io/me" class="link-creador" target="_blank"
-                    rel="noopener noreferrer">Daniel Herrera</a></p>
-            <p><a href="https://github.com/leoColmeck" class="link-creador" target="_blank"
-                    rel="noopener noreferrer">Leonel Benavides</a></p>
-            <p><a href="https://github.com/SofiaCantalupi" class="link-creador" target="_blank"
-                    rel="noopener noreferrer">Sofia Cantalupi</a></p>
-            <p><a href="https://github.com/FrancoCancino" class="link-creador" target="_blank"
-                    rel="noopener noreferrer">Franco Cancino</a>.</p>
+                    rel="noopener noreferrer">Repositorio Backend</a></p>
+            <p><a href="https://github.com/DanielHerrer/petFinderMDP_web" target="_blank"
+                    rel="noopener noreferrer">Repositorio Frontend</a></p>
         </div>
     </footer>
 
     <!-- SCRIPTS PROPIOS -->
     <script src="./js/global.js"></script>
+    <script src="./js/index.js"></script>
 
 </body>
 

@@ -1,8 +1,8 @@
 .container {
     width: 100%;
-    margin: 0 auto;
-    padding: 10px 30px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 0;
+    padding: 0;
+    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
 }
 
 /* SPINNER DE "CARGANDO MURO" _________________________________ */
@@ -50,6 +50,7 @@
     /* left: 50%; */
     /* transform: translateX(-50%); */
     margin: 0 auto;
+    padding: 15px 0 5px 0;
     z-index: 1000;
     display: flex;
     justify-content: center;
@@ -87,13 +88,17 @@
 }
 
 /* PUBLICACIONES ___________________________________________________________________________________ */
+.muro-publicaciones {
+    padding: 0 10em;
+}
+
 .publicacion {
     background-color: white;
     border: 1px solid #ccc;
     border-radius: 8px;
     padding: 12px 38px;
     margin: 10px 0;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 7px rgba(0, 0, 0, 0.2);
     text-align: center;
 }
 
@@ -147,14 +152,14 @@
         justify-content: center;
     }
 
-    .container {
-        width: 100%;
-        margin: 0 auto;
-        padding: 10px 0;
+    /* PUBLICACIONES ___________________________________________________________________________________ */
+    .muro-publicaciones {
+        padding: 0;
     }
 
     .publicacion {
         border-radius: 0;
+        padding: 0.25em 1em 1em 1em;
     }
 
     .publicacion img {
@@ -166,12 +171,27 @@
 
 /*-------------------------------------------------------------------------------------------------------------------- */
 
-@media (min-width: 576px) and (max-width: 767px) {}
+@media (min-width: 576px) and (max-width: 767px) {
+    /* PUBLICACIONES ___________________________________________________________________________________ */
+    .muro-publicaciones {
+        padding: 0 4em;
+    }
+}
 
 /*-------------------------------------------------------------------------------------------------------------------- */
 /* Estilos para tablets grandes */
-@media (min-width: 768px) and (max-width: 991px) {}
+@media (min-width: 768px) and (max-width: 991px) {
+    /* PUBLICACIONES ___________________________________________________________________________________ */
+    .muro-publicaciones {
+        padding: 0 6em;
+    }
+}
 
 /*-------------------------------------------------------------------------------------------------------------------- */
 /* 6. Escritorio */
-@media (min-width: 992px) {}
+@media (min-width: 992px) {
+    /* PUBLICACIONES ___________________________________________________________________________________ */
+    .muro-publicaciones {
+        padding: 0 20em;
+    }
+}

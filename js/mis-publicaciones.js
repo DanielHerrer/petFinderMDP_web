@@ -50,7 +50,13 @@ document.addEventListener("DOMContentLoaded", async () => {
 
             for (const p of publicaciones) {
 
-                const titulo = `${p.mascota.tipoMascota} (Mascota ${p.mascota.estadoMascota})`;
+                let titulo = "";
+                if (p.mascota.estadoMascota === "PERDIDA") {
+                    titulo = `${p.mascota.tipoMascota} <span style="color: #fff; background-color: rgb(255, 87, 87); padding: 5px 10px; border-radius: 3px;">Mascota ${p.mascota.estadoMascota}</span>`;
+                } else {
+                    titulo = `${p.mascota.tipoMascota} <span style="color: #fff; background-color: rgb(87, 140, 255); padding: 5px 10px; border-radius: 3px;">Mascota ${p.mascota.estadoMascota}</span>`;
+                }
+                
                 const fotoUrl = p.mascota.fotoUrl;
                 const nombreMascota = p.mascota.nombre || "Sin nombre";
                 const calle = `${p.ubicacion.direccion} ${p.ubicacion.altura}`;
